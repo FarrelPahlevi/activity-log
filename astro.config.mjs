@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://farrel-activity-log.netlify.app',
+  site: 'https://farrelactivitylog.netlify.app',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
