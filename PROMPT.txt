@@ -1,0 +1,81 @@
+KONTEKS PROJECT
+Buatkan aku website portofolio pribadi yang berfungsi sebagai "activity log". 
+Setiap kali aku menyelesaikan suatu project/kegiatan (misal: restorasi HP lama, 
+instalasi jaringan, project software, dll), aku akan menambahkan entri baru 
+berisi dokumentasi (foto, deskripsi, tools yang dipakai). Website ini harus 
+mudah di-update secara rutin TANPA perlu coding ulang tiap kali nambah konten.
+
+TECH STACK
+- Astro (static site generator) sebagai framework utama
+- Tailwind CSS untuk styling
+- Decap CMS sebagai admin panel berbasis Git, diakses di route /admin — supaya 
+  aku bisa tambah/edit entri lewat form di browser (termasuk dari HP) tanpa 
+  buka code editor atau terminal
+- Auth untuk Decap CMS pakai DecapBridge (https://decapbridge.com) — JANGAN 
+  pakai Netlify Identity atau Git Gateway, keduanya sudah deprecated per 
+  Februari 2025 dan tidak direkomendasikan untuk setup baru
+- Setup config.yml backend dengan format berikut (nilai identity_url akan aku 
+  isi manual setelah daftar akun DecapBridge, untuk sekarang pakai placeholder):
+  backend:
+    name: git-gateway
+    repo: USERNAME/REPO_NAME
+    branch: main
+    identity_url: https://auth.decapbridge.com/sites/SITE_ID_PLACEHOLDER
+    gateway_url: https://gateway.decapbridge.com
+- Hosting: Netlify free tier (hanya untuk build & hosting static site, bukan 
+  untuk auth CMS)
+- Konten disimpan sebagai Markdown file di src/content/ (Astro content 
+  collections) — tetap portable & version-controlled
+
+STRUKTUR KONTEN (content collection "activities")
+Setiap entri punya frontmatter:
+- title (string)
+- date (date)
+- category (select/enum: "Elektronik & Reparasi", "Jaringan", 
+  "Software & Programming", "DIY & Rumah", "Lainnya")
+- coverImage (image upload)
+- summary (short text, 1-2 kalimat, dipakai untuk preview di list)
+- tags (list of string, misal: "Raspberry Pi", "Android", "Networking")
+- body (markdown content, support embed banyak gambar)
+
+HALAMAN YANG DIBUTUHKAN
+1. Homepage — hero section singkat (nama, tagline singkat, foto profil 
+   opsional) + grid kegiatan terbaru (6 terbaru: cover image, title, tanggal, 
+   badge category)
+2. Halaman "Semua Kegiatan" — full archive dengan filter by category dan 
+   search by title/tag
+3. Halaman detail kegiatan — full content, gallery foto, tags, tombol back
+4. Halaman "Tentang" — bio singkat, skill, kontak (email/sosmed)
+5. RSS feed + sitemap.xml untuk SEO dasar
+
+DESIGN
+- Clean, modern, minimalis (portfolio look, bukan corporate/generic template)
+- Mobile-first, fully responsive (sering diakses/update dari HP)
+- Dark mode toggle (nice to have)
+- Layout card-based untuk list kegiatan
+
+ADMIN / CARA NAMBAH ENTRI
+- Setup Decap CMS config.yml dengan collection "activities" sesuai skema 
+  di atas, termasuk field image upload untuk cover dan body content
+- Halaman /admin cukup load Decap CMS core (decap-cms.js) + config.yml, 
+  TANPA script netlify-identity-widget.js (tidak dibutuhkan lagi dengan 
+  DecapBridge)
+
+DELIVERABLES
+- Full source code, siap di-push ke GitHub
+- README.md berisi:
+  1. Cara run lokal (npm install, npm run dev)
+  2. Cara push ke GitHub & deploy ke Netlify
+  3. Cara daftar DecapBridge dan generate GitHub Personal Access Token 
+     (fine-grained, scope Contents + Pull requests: Read and write, 
+     dibatasi ke repo ini saja)
+  4. Cara update identity_url di config.yml setelah dapat site_id dari 
+     DecapBridge, lalu commit & push supaya Netlify rebuild
+  5. Cara akses dan pakai /admin setelah semua tersambung
+- 2-3 entri dummy sebagai contoh (misal "Restorasi HP Lama" dan 
+  "Instalasi Jaringan Rumah") biar strukturnya langsung kelihatan jalan
+
+Tolong scaffold semuanya dari awal, termasuk config Astro, Tailwind, dan 
+Decap CMS-nya sekaligus. Setelah selesai, kasih ringkasan langkah manual apa 
+saja yang masih perlu aku kerjakan sendiri (daftar DecapBridge, generate 
+token, dll) karena itu tidak bisa diotomatisasi dari sini.

@@ -1,0 +1,190 @@
+---
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CategoryBadge from "../../components/CategoryBadge.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const activities = await getCollection("activities");
+  return activities.map((activity) => ({
+    params: { slug: activity.id },
+    props: { activity },
+  }));
+}
+
+const { activity } = Astro.props;
+const { Content } = await render(activity);
+
+const formattedDate = activity.data.date.toLocaleDateString("id-ID", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<BaseLayout
+  title={activity.data.title}
+  description={activity.data.summary}
+  ogImage={activity.data.coverImage}
+>
+  <Navbar slot="navbar" />
+
+  <article class="article-page">
+    <div class="container">
+      <!-- Back Button -->
+      <a href="/kegiatan/" class="back-link animate-fade-in">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Kembali ke Kegiatan
+      </a>
+
+      <!-- Article Header -->
+      <header class="article-header animate-fade-in-up">
+        <div class="article-meta">
+          <CategoryBadge category={activity.data.category} />
+          <time datetime={activity.data.date.toISOString()}>{formattedDate}</time>
+        </div>
+
+        <h1 class="article-title">{activity.data.title}</h1>
+        <p class="article-summary">{activity.data.summary}</p>
+
+        <div class="article-tags">
+          {activity.data.tags.map((tag: string) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </header>
+
+      <!-- Cover Image -->
+      <div class="article-cover animate-fade-in-up delay-1">
+        <img
+          src={activity.data.coverImage}
+          alt={activity.data.title}
+          class="cover-image"
+        />
+      </div>
+
+      <!-- Article Content -->
+      <div class="article-content animate-fade-in-up delay-2">
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="article-bottom animate-fade-in delay-3">
+        <a href="/kegiatan/" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Kembali ke Semua Kegiatan
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .article-page {
+    padding: 7rem 0 2rem;
+  }
+
+  .article-page .container {
+    max-width: 860px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: all var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+    transform: translateX(-4px);
+  }
+
+  .article-header {
+    margin-bottom: 2rem;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .article-meta time {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .article-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .article-summary {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .article-cover {
+    margin-bottom: 2.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .cover-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .article-content {
+    margin-bottom: 3rem;
+  }
+
+  .article-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 640px) {
+    .article-title {
+      font-size: 1.75rem;
+    }
+
+    .article-summary {
+      font-size: 1rem;
+    }
+  }
+</style>

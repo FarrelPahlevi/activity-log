@@ -1,0 +1,286 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/kegiatan/", label: "Kegiatan" },
+  { href: "/tentang/", label: "Tentang" },
+];
+---
+
+<nav class="navbar" id="main-navbar">
+  <div class="nav-container container">
+    <a href="/" class="nav-logo" id="nav-logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">Farrel<span class="logo-dot">.</span></span>
+    </a>
+
+    <div class="nav-links" id="nav-links">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={["nav-link", { active: currentPath === link.href }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="nav-actions">
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        title="Toggle dark mode"
+      >
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <button
+        class="mobile-menu-btn"
+        id="mobile-menu-btn"
+        aria-label="Toggle menu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class:list={["mobile-link", { active: currentPath === link.href }]}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<script is:inline>
+  // Theme toggle
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    const html = document.documentElement;
+    const current = html.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+
+  // Mobile menu
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  menuBtn.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    menuBtn.classList.toggle("open", isOpen);
+  });
+
+  // Navbar scroll effect
+  let lastScroll = 0;
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("main-navbar");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    transition: all var(--transition-base);
+    background: transparent;
+  }
+
+  .navbar.scrolled {
+    background: rgba(11, 17, 32, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75rem 0;
+  }
+
+  :global([data-theme="light"]) .navbar.scrolled {
+    background: rgba(248, 250, 252, 0.9);
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .nav-logo:hover {
+    color: var(--color-text-primary);
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+
+  .logo-dot {
+    color: var(--color-accent);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+  }
+
+  .nav-link.active {
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.625rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  :global([data-theme="dark"]) .icon-moon { display: none; }
+  :global([data-theme="dark"]) .icon-sun { display: block; }
+  :global([data-theme="light"]) .icon-sun { display: none; }
+  :global([data-theme="light"]) .icon-moon { display: block; }
+
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 0.625rem;
+    background: var(--color-bg-card);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text-secondary);
+    border-radius: 2px;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-menu-btn.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .mobile-menu-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-btn.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    padding: 1rem 1.5rem 1.5rem;
+    background: var(--color-bg-card);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mobile-menu.open {
+    display: flex;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .mobile-link {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-link:hover,
+  .mobile-link.active {
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+    .mobile-menu-btn {
+      display: flex;
+    }
+  }
+</style>

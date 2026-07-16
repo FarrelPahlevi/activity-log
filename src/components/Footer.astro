@@ -1,0 +1,133 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <span class="logo-icon">⚡</span>
+          <span>Farrel<span class="logo-dot">.</span></span>
+        </a>
+        <p class="footer-desc">
+          Dokumentasi kegiatan, project, dan eksperimen teknis sehari-hari.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">Navigasi</h4>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/kegiatan/">Semua Kegiatan</a>
+          <a href="/tentang/">Tentang</a>
+          <a href="/rss.xml" target="_blank">RSS Feed</a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">Kontak</h4>
+        <div class="footer-links">
+          <a href="mailto:farrel@example.com">Email</a>
+          <a href="https://github.com/farrel" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/farrel" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://instagram.com/farrel" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Farrel. Dibuat dengan <span class="heart">♥</span> dan Astro.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: 5rem;
+    padding: 3rem 0 0;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+  }
+
+  .logo-icon {
+    font-size: 1.3rem;
+  }
+
+  .logo-dot {
+    color: var(--color-accent);
+  }
+
+  .footer-desc {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .footer-heading {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-bottom {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  .heart {
+    color: #ef4444;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

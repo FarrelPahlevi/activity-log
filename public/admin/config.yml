@@ -1,0 +1,68 @@
+backend:
+  name: git-gateway
+  repo: USERNAME/REPO_NAME
+  branch: main
+  identity_url: https://auth.decapbridge.com/sites/SITE_ID_PLACEHOLDER
+  gateway_url: https://gateway.decapbridge.com
+
+# Media
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+# Collections
+collections:
+  - name: "activities"
+    label: "Kegiatan"
+    label_singular: "Kegiatan"
+    folder: "src/data/activities"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    sort: "date:desc"
+    summary: "{{title}} — {{date}}"
+    fields:
+      - label: "Judul"
+        name: "title"
+        widget: "string"
+        hint: "Judul kegiatan yang deskriptif"
+
+      - label: "Tanggal"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "DD MMMM YYYY"
+        time_format: false
+        hint: "Tanggal kegiatan dikerjakan"
+
+      - label: "Kategori"
+        name: "category"
+        widget: "select"
+        options:
+          - "Elektronik & Reparasi"
+          - "Jaringan"
+          - "Software & Programming"
+          - "DIY & Rumah"
+          - "Lainnya"
+
+      - label: "Cover Image"
+        name: "coverImage"
+        widget: "image"
+        choose_url: false
+        hint: "Foto utama untuk kegiatan ini (rasio 16:10 recommended)"
+
+      - label: "Ringkasan"
+        name: "summary"
+        widget: "text"
+        hint: "1-2 kalimat singkat tentang kegiatan ini (muncul di preview list)"
+
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        hint: "Tag terkait, misal: Arduino, Networking, Docker"
+
+      - label: "Konten"
+        name: "body"
+        widget: "markdown"
+        hint: "Dokumentasi lengkap kegiatan. Bisa embed gambar, code block, tabel, dll."

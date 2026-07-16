@@ -1,0 +1,304 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Tentang"
+  description="Tentang Farrel — bio, skill, dan kontak."
+>
+  <Navbar slot="navbar" />
+
+  <section class="about-page">
+    <div class="container">
+      <div class="about-layout">
+        <!-- Profile Section -->
+        <div class="about-profile animate-fade-in-up">
+          <div class="profile-avatar">
+            <div class="avatar-placeholder">F</div>
+          </div>
+          <h1 class="profile-name gradient-text">Farrel</h1>
+          <p class="profile-title">Tech Enthusiast & Maker</p>
+          <div class="profile-socials">
+            <a href="mailto:farrel@example.com" class="social-link" title="Email" aria-label="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://github.com/farrel" target="_blank" rel="noopener" class="social-link" title="GitHub" aria-label="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://linkedin.com/in/farrel" target="_blank" rel="noopener" class="social-link" title="LinkedIn" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://instagram.com/farrel" target="_blank" rel="noopener" class="social-link" title="Instagram" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bio Section -->
+        <div class="about-content animate-fade-in-up delay-1">
+          <div class="about-section">
+            <h2>👋 Tentang Saya</h2>
+            <p>
+              Halo! Saya <strong>Farrel</strong>, seorang tech enthusiast yang
+              suka ngoprek berbagai hal — dari restorasi hardware, instalasi
+              jaringan, sampai setup home server. Website ini adalah tempat saya
+              mendokumentasikan semua kegiatan teknis yang saya kerjakan.
+            </p>
+            <p>
+              Saya percaya bahwa setiap project, sekecil apapun, punya cerita
+              dan pembelajaran yang layak dicatat. Activity log ini bukan hanya
+              portofolio, tapi juga catatan perjalanan belajar saya.
+            </p>
+          </div>
+
+          <div class="about-section">
+            <h2>🛠️ Skills & Tools</h2>
+            <div class="skills-grid">
+              <div class="skill-category">
+                <h3>Hardware</h3>
+                <div class="skill-tags">
+                  <span class="tag">Soldering</span>
+                  <span class="tag">Smartphone Repair</span>
+                  <span class="tag">Cable Crimping</span>
+                  <span class="tag">Raspberry Pi</span>
+                  <span class="tag">Arduino</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h3>Networking</h3>
+                <div class="skill-tags">
+                  <span class="tag">LAN/WAN</span>
+                  <span class="tag">WiFi Setup</span>
+                  <span class="tag">MikroTik</span>
+                  <span class="tag">Firewall</span>
+                  <span class="tag">DNS</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h3>Software</h3>
+                <div class="skill-tags">
+                  <span class="tag">Linux</span>
+                  <span class="tag">Docker</span>
+                  <span class="tag">Git</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Bash</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h3>DIY</h3>
+                <div class="skill-tags">
+                  <span class="tag">3D Printing</span>
+                  <span class="tag">Custom PC Build</span>
+                  <span class="tag">Smart Home</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-section">
+            <h2>📬 Kontak</h2>
+            <p>
+              Mau diskusi tentang project, kolaborasi, atau sekadar ngobrol
+              tentang teknologi? Jangan ragu untuk menghubungi saya!
+            </p>
+            <div class="contact-cards">
+              <a href="mailto:farrel@example.com" class="contact-card">
+                <span class="contact-icon">📧</span>
+                <span class="contact-label">farrel@example.com</span>
+              </a>
+              <a href="https://github.com/farrel" target="_blank" rel="noopener" class="contact-card">
+                <span class="contact-icon">💻</span>
+                <span class="contact-label">github.com/farrel</span>
+              </a>
+              <a href="https://instagram.com/farrel" target="_blank" rel="noopener" class="contact-card">
+                <span class="contact-icon">📸</span>
+                <span class="contact-label">@farrel</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding: 8rem 0 4rem;
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* Profile */
+  .about-profile {
+    position: sticky;
+    top: 6rem;
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  :global([data-theme="dark"]) .about-profile {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(12px);
+  }
+
+  .avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent), #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 auto 1.25rem;
+  }
+
+  .profile-name {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .profile-title {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-socials {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.625rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+  }
+
+  .social-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+    transform: translateY(-2px);
+  }
+
+  /* Content */
+  .about-section {
+    margin-bottom: 3rem;
+  }
+
+  .about-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-section p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-section p strong {
+    color: var(--color-text-primary);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .skill-category h3 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .contact-card:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateX(4px);
+  }
+
+  .contact-icon {
+    font-size: 1.25rem;
+  }
+
+  .contact-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-profile {
+      position: static;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+
+const categoryMap: Record<string, { class: string; icon: string }> = {
+  "Elektronik & Reparasi": { class: "badge-elektronik", icon: "🔧" },
+  "Jaringan": { class: "badge-jaringan", icon: "🌐" },
+  "Software & Programming": { class: "badge-software", icon: "💻" },
+  "DIY & Rumah": { class: "badge-diy", icon: "🏠" },
+  "Lainnya": { class: "badge-lainnya", icon: "📦" },
+};
+
+const info = categoryMap[category] || categoryMap["Lainnya"];
+---
+
+<span class:list={["badge", info.class]}>
+  <span class="badge-icon">{info.icon}</span>
+  {category}
+</span>
+
+<style>
+  .badge-icon {
+    font-size: 0.7rem;
+  }
+</style>
