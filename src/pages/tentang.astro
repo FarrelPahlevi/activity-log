@@ -190,7 +190,7 @@ import Footer from "../components/Footer.astro";
             </p>
             <div class="contact-cards">
               <a href="mailto:farrel@example.com" class="contact-card">
-                <span class="contact-icon">📧</span>
+                <span class="contact-icon"><img src="/logo/google_mail_gmail_logo_icon_159346.png" alt="Gmail" class="contact-logo" /></span>
                 <span class="contact-label">farrel@example.com</span>
               </a>
               <a
@@ -199,7 +199,7 @@ import Footer from "../components/Footer.astro";
                 rel="noopener"
                 class="contact-card"
               >
-                <span class="contact-icon">💻</span>
+                <span class="contact-icon"><img src="/logo/Octicons-mark-github.svg" alt="GitHub" class="contact-logo" /></span>
                 <span class="contact-label">github.com/farrel</span>
               </a>
               <a
@@ -208,7 +208,7 @@ import Footer from "../components/Footer.astro";
                 rel="noopener"
                 class="contact-card"
               >
-                <span class="contact-icon">📸</span>
+                <span class="contact-icon"><img src="/logo/Instagram_logo_2022.svg" alt="Instagram" class="contact-logo" /></span>
                 <span class="contact-label">@farrel</span>
               </a>
             </div>
@@ -373,6 +373,15 @@ import Footer from "../components/Footer.astro";
 
   .contact-icon {
     font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
   }
 
   .contact-label {
